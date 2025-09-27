@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kaarttruc — Reünie Boschjes 2025</title>
+  <style>
+    body {font-family: Arial, sans-serif; text-align: center; background: #0f1724; color: #fff; padding: 20px;}
+    h1 {margin-bottom: 10px;}
+    #cards {display: flex; justify-content: center; gap: 10px; margin: 20px 0; flex-wrap: wrap;}
+    .card {width: 100px; height: 145px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,.5);}    
+    button {padding: 10px 20px; font-size: 16px; border: none; border-radius: 6px; background: #0ea5a4; color: #032222; cursor: pointer;}
+    button:hover {background: #14b8b8;}
+  </style>
+</head>
+<body>
+  <h1>Reünie Boschjes 2025</h1>
+  <p id="instruction">Neem één van deze kaarten in gedachten…</p>
+  <div id="cards"></div>
+  <button id="nextBtn">Verder</button>
+
+  <script>
+    const cardImages = [
+      "https://deckofcardsapi.com/static/img/AS.png",
+      "https://deckofcardsapi.com/static/img/KH.png",
+      "https://deckofcardsapi.com/static/img/QC.png",
+      "https://deckofcardsapi.com/static/img/2D.png",
+      "https://deckofcardsapi.com/static/img/7H.png",
+      "https://deckofcardsapi.com/static/img/JC.png"
+    ];
+
+    const otherSet = [
+      "https://deckofcardsapi.com/static/img/3S.png",
+      "https://deckofcardsapi.com/static/img/KH.png",
+      "https://deckofcardsapi.com/static/img/5C.png",
+      "https://deckofcardsapi.com/static/img/QD.png",
+      "https://deckofcardsapi.com/static/img/8S.png"
+    ];
+
+    const cardsDiv = document.getElementById("cards");
+    const btn = document.getElementById("nextBtn");
+    const instr = document.getElementById("instruction");
+
+    function showCards(set) {
+      cardsDiv.innerHTML = "";
+      set.forEach(src => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.className = "card";
+        cardsDiv.appendChild(img);
+      });
+    }
+
+    let step = 0;
+    showCards(cardImages);
+
+    btn.addEventListener("click", ()=>{
+      if(step === 0){
+        instr.textContent = "En nu… is jouw kaart verdwenen!";
+        showCards(otherSet);
+        btn.style.display = "none";
+      }
+      step++;
+    });
+  </script>
+</body>
+</html>
